@@ -6,8 +6,13 @@ RoboTHOR ObjectNav
 We've included instructions for installing the full AllenAct library (modifiable) with conda for [our branch](https://github.com/allenai/embodied-clip/tree/allenact), although you can also use the [official AllenAct repo (v0.5.0)](https://github.com/allenai/allenact/tree/v0.5.0) or perhaps newer.
 
 ```bash
-git clone -b allenact --single-branch https://github.com/bambooCV/embodied-clip.git embclip-allenact
-cd embclip-allenact
+git clone -b allenact --single-branch https://github.com/bambooCV/embodied-clip.git embclip-bamboo
+cd embclip-bamboo
+# Full library allenact
+pip install -r requirements.txt; pip install -r dev_requirements.txt
+
+pip install -r allenact_plugins/<PLUGIN_NAME>_plugin/extra_requirements.txt
+# Plugins extra requirements Install RoboTHOR and CLIP plugins
 
 export EMBCLIP_ENV_NAME=embclip-allenact
 export CONDA_BASE="$(dirname $(dirname "${CONDA_EXE}"))"
@@ -20,9 +25,6 @@ conda env update --file ./conda/environment-<CUDA_VERSION>.yml --name $EMBCLIP_E
 # OR for cpu mode
 conda env update --file ./conda/environment-cpu.yml --name $EMBCLIP_ENV_NAME
 
-# Install RoboTHOR and CLIP plugins
-conda env update --file allenact_plugins/robothor_plugin/extra_environment.yml --name $EMBCLIP_ENV_NAME
-conda env update --file allenact_plugins/clip_plugin/extra_environment.yml --name $EMBCLIP_ENV_NAME
 
 # Download RoboTHOR dataset
 bash datasets/download_navigation_datasets.sh robothor-objectnav
